@@ -1,4 +1,4 @@
-import { PrismaClient, TransactionType, PayPeriod } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -85,7 +85,7 @@ async function main() {
             userId: user.id,
             type: ["WEEKLY", "BIWEEKLY", "MONTHLY"][
               Math.floor(Math.random() * 3)
-            ] as PayPeriod,
+            ],
             totalLimit: Math.floor(Math.random() * 5000) + 1000,
             startDate: new Date(),
             endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
@@ -122,9 +122,7 @@ async function main() {
           data: {
             userId: user.id,
             amount: Math.floor(Math.random() * 1000) + 100,
-            type: ["INCOME", "EXPENSE"][
-              Math.floor(Math.random() * 2)
-            ] as TransactionType,
+            type: ["INCOME", "EXPENSE"][Math.floor(Math.random() * 2)],
             categoryId: category.id,
             date: new Date(),
           },
